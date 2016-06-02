@@ -82,6 +82,9 @@ Mat Vx = Mat::zeros(height[0],width[0],CV_32FC1);
 Mat Vy = Mat::zeros(height[0],width[0],CV_32FC1);
 Mat Vz = Mat::zeros(height[0],width[0],CV_32FC1);
 
+Mat OFlowX = Mat::zeros(height[0],width[0],CV_32FC1);
+Mat OFlowY = Mat::zeros(height[0],width[0],CV_32FC1);
+
 Mat DEPTH0,DEPTH1;
 
 CvPoint2D32f *point = new CvPoint2D32f[Npoints];
@@ -581,9 +584,15 @@ int main(int argc, char **argv) {
 				Vy.setTo(0);
 				Vz.setTo(0);
 
+				OFlowX.setTo(0);
+				OFlowY.setTo(0);
+
 				Vx = SF[0] + SFrig[0];
 				Vy = SF[1] + SFrig[1];
 				Vz = SF[2] + SFrig[2];
+
+				OFlowX = OF[0] + OFrig[0];
+				OFlowY = OF[1] + OFrig[1];
 
 				if (ViewOutput == 1) {
 
@@ -658,6 +667,8 @@ int main(int argc, char **argv) {
 				SFlow << "SFy" << Vy;
 				SFlow << "SFz" << Vz;
 				SFlow << "Mask" << Mask;
+				SFlow << "OFx" << OFlowX;
+				SFlow << "OFy" << OFlowY;
 
 
 			}
